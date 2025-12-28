@@ -7,6 +7,7 @@ Singleton {
     id: root
 
     property alias toggleSwaync: toggleSwaync
+    property alias toggleDnd: toggleDnd
     property string dndStatus
     property string notificationCount
     property string notificationIcon: {
@@ -26,6 +27,12 @@ Singleton {
         id: toggleSwaync
 
         command: ["sh", "-c", "swaync-client -t -sw"]
+    }
+
+    Process {
+        id: toggleDnd
+
+        command: ["sh", "-c", "swaync-client -d"]
     }
 
     Process {

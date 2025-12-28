@@ -15,51 +15,35 @@ PanelWindow {
         right: true
     }
 
-    // Main container
     Item {
         anchors.fill: parent
 
-        // Background layout for left and right
         RowLayout {
-            anchors.fill: parent
-            spacing: 0
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.leftMargin: 10
 
-            // LEFT section
-            RowLayout {
-                spacing: 10
-                Layout.alignment: Qt.AlignVCenter
-                Layout.leftMargin: 7
-
-                WorkspaceWidget {
-                }
-
-            }
-
-            // SPACER
-            Item {
-                Layout.fillWidth: true
-            }
-
-            // RIGHT section
-            RowLayout {
-                spacing: 10
-                Layout.alignment: Qt.AlignVCenter
-                Layout.rightMargin: 15
-
-                BatteryWidget {
-                }
-
-                NotificationWidget {
-                }
-
+            WorkspaceWidget {
             }
 
         }
 
-        // CENTER (overlay with pointer events disabled for click-through)
+        RowLayout {
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.rightMargin: 10
+            spacing: 10
+
+            BatteryWidget {
+            }
+
+            NotificationWidget {
+            }
+
+        }
+
         ClockWidget {
             anchors.centerIn: parent
-            z: 10 // Ensure it's on top
         }
 
     }

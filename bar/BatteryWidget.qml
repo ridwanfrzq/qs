@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 
-Row {
+RowLayout {
     Rectangle {
         id: batOutline
 
