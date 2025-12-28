@@ -6,6 +6,8 @@ pragma Singleton
 Singleton {
     id: root
 
+    property alias toggleSwaync: toggleSwaync
+
     Process {
         id: toggleSwaync
 

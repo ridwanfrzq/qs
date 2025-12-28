@@ -54,6 +54,7 @@ Row {
                 if (BatteryProcess.batteryStatus === "Discharging")
                     return BatteryProcess.batteryCapacity + "%";
 
+                return "N/A";
             }
             color: "#dfe3e7" // On Background
             font.pixelSize: 10
