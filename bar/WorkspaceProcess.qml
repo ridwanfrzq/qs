@@ -6,8 +6,12 @@ pragma Singleton
 Singleton {
     id: root
 
-    property string ws
+    // ========= State =========
+    property string ws: ""
+    property string overview: ""
+    readonly property string output: overview === "Overview is open." ? "Workspace " + ws + " [Overview]" : "Workspace " + ws
 
+    // ========= Workspace =========
     Process {
         id: wsProc
 
@@ -15,16 +19,37 @@ Singleton {
         running: true
 
         stdout: StdioCollector {
-            onStreamFinished: root.ws = this.text
+            onStreamFinished: {
+                root.ws = this.text.trim();
+            }
         }
 
     }
 
+    // ========= Overview =========
+    Process {
+        id: overviewProc
+
+        command: ["sh", "-c", "niri msg overview-state"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                root.overview = this.text.trim();
+            }
+        }
+
+    }
+
+    // ========= Polling =========
     Timer {
         interval: 100
         running: true
         repeat: true
-        onTriggered: wsProc.running = true
+        onTriggered: {
+            wsProc.running = true;
+            overviewProc.running = true;
+        }
     }
 
 }
