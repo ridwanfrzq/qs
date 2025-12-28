@@ -7,8 +7,9 @@ Singleton {
     id: root
 
     // ========= State =========
-    property string ws: ""
-    property string overview: ""
+    property string ws
+    property string overview
+    property string window
     readonly property string output: overview === "Overview is open." ? "Workspace " + ws + " [Overview]" : "Workspace " + ws
 
     // ========= Workspace =========
@@ -41,6 +42,20 @@ Singleton {
 
     }
 
+    Process {
+        id: windowProc
+
+        command: ["sh", "-c", "niri msg --json focused-window | jq -r '.app_id'"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                root.window = this.text.trim();
+            }
+        }
+
+    }
+
     // ========= Polling =========
     Timer {
         interval: 100
@@ -49,6 +64,7 @@ Singleton {
         onTriggered: {
             wsProc.running = true;
             overviewProc.running = true;
+            windowProc.running = true;
         }
     }
 
