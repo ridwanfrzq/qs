@@ -12,7 +12,7 @@ Row {
         font.family: "Iosevka NF"
         color: "#dfe3e7"
         // ambil data dari singleton
-        text: ""
+        text: NotificationProcess.notificationIcon
         anchors.verticalCenter: parent.verticalCenter
     }
 
