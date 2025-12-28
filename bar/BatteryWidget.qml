@@ -54,6 +54,9 @@ RowLayout {
                 if (BatteryProcess.batteryStatus === "Discharging")
                     return BatteryProcess.batteryCapacity + "%";
 
+                if (BatteryProcess.batteryStatus === "Not charging")
+                    return BatteryProcess.batteryCapacity + "%";
+
                 return "N/A";
             }
             color: "#dfe3e7" // On Background
