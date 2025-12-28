@@ -6,17 +6,19 @@ Row {
 
     Text {
         text: "󱂬"
-        color: "#b4befe"
+        color: "#dfe3e7"
         font.family: "Nerd Font"
         font.pixelSize: 16
+        anchors.verticalCenter: parent.verticalCenter
     }
 
     Text {
         text: "Workspace " + WorkspaceProcess.ws
-        color: "#cdd6f4"
+        color: "#dfe3e7"
         font.pixelSize: 14
         font.family: "Iosevka NF"
         font.bold: true
+        anchors.verticalCenter: parent.verticalCenter
     }
 
 }

@@ -7,7 +7,7 @@ PanelWindow {
     id: bar
 
     implicitHeight: 32
-    color: "#0f0f0f"
+    color: "#101417"
 
     anchors {
         top: true
@@ -15,43 +15,53 @@ PanelWindow {
         right: true
     }
 
-    RowLayout {
+    // Main container
+    Item {
         anchors.fill: parent
 
-        // LEFT
+        // Background layout for left and right
         RowLayout {
-            spacing: 10
-            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-            Layout.leftMargin: 7
-            Layout.fillWidth: false
+            anchors.fill: parent
+            spacing: 0
 
-            WorkspaceWidget {
+            // LEFT section
+            RowLayout {
+                spacing: 10
+                Layout.alignment: Qt.AlignVCenter
+                Layout.leftMargin: 7
+
+                WorkspaceWidget {
+                }
+
+            }
+
+            // SPACER
+            Item {
+                Layout.fillWidth: true
+            }
+
+            // RIGHT section
+            RowLayout {
+                spacing: 10
+                Layout.alignment: Qt.AlignVCenter
+                Layout.rightMargin: 15
+
+                BatteryWidget {
+                }
+
+                NotificationWidget {
+                }
+
             }
 
         }
 
-        // SPACER
-        Item {
-            Layout.fillWidth: true
+        // CENTER (overlay with pointer events disabled for click-through)
+        ClockWidget {
+            anchors.centerIn: parent
+            z: 10 // Ensure it's on top
         }
 
-        // RIGHT (kosong dulu kalau mau)
-        RowLayout {
-            spacing: 10
-            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-            Layout.rightMargin: 7
-            Layout.fillWidth: false
-
-            BatteryWidget {
-            }
-
-        }
-
-    }
-
-    // CENTER (overlay aman)
-    ClockWidget {
-        anchors.centerIn: parent
     }
 
 }

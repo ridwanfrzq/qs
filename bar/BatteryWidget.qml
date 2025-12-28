@@ -4,10 +4,12 @@ import Quickshell
 
 Row {
     Rectangle {
-        width: 60
-        height: 20
+        id: batOutline
+
+        width: 45
+        height: 18
         color: "transparent"
-        border.color: BatteryProcess.batteryCapacity <= 20 ? "#f38ba8" : "#94e2d5"
+        border.color: BatteryProcess.batteryCapacity <= 20 ? "#f38ba8" : "#8b9198" // outline
         border.width: 2
         radius: 3
 
@@ -20,15 +22,15 @@ Row {
             width: Math.max(0, (parent.width - 4) * (BatteryProcess.batteryCapacity / 100))
             color: {
                 if (BatteryProcess.batteryStatus === "Charging")
-                    return "#a6e3a1";
+                    return '#15be17';
 
                 if (BatteryProcess.batteryCapacity <= 20)
-                    return "#f38ba8";
+                    return "#d00000";
 
-                if (BatteryProcess.batteryCapacity <= 50)
-                    return "#f9e2af";
+                if (BatteryProcess.batteryCapacity <= 30)
+                    return "#ffb000";
 
-                return "#94e2d5";
+                return "#353a3d"; //surface bright
             }
             radius: 2
         }
@@ -39,14 +41,21 @@ Row {
             anchors.verticalCenter: parent.verticalCenter
             width: 3
             height: 10
-            color: BatteryProcess.batteryCapacity <= 20 ? "#f38ba8" : "#94e2d5"
+            color: batOutline.border.color
             radius: 1
         }
 
         // Percentage text
         Text {
-            text: BatteryProcess.batteryCapacity + "%"
-            color: "#cdd6f4"
+            text: {
+                if (BatteryProcess.batteryStatus === "Charging")
+                    return "󱐋 " + BatteryProcess.batteryCapacity + "%";
+
+                if (BatteryProcess.batteryStatus === "Discharging")
+                    return BatteryProcess.batteryCapacity + "%";
+
+            }
+            color: "#dfe3e7" // On Background
             font.pixelSize: 10
             font.bold: true
             anchors.centerIn: parent
