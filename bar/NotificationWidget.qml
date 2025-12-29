@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
+import qs.color as Color
 
 RowLayout {
     //Layout.minimumWidth: 10
@@ -26,7 +27,7 @@ RowLayout {
             font.pixelSize: 14
             font.bold: true
             font.family: "Iosevka NF"
-            color: "#dfe3e7"
+            color: Color.Matugen.colors.on_background
             text: NotificationProcess.notificationIcon
         }
 

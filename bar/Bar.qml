@@ -2,12 +2,15 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
+import qs.color as Color
 
 PanelWindow {
     id: bar
 
+    property string opacity: "e6"
+
     implicitHeight: 32
-    color: "#101417"
+    color: "#" + opacity + Color.Matugen.colors.background.slice(1)
 
     anchors {
         top: true

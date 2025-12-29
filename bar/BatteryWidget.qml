@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import qs.color as Color
 
 RowLayout {
     Rectangle {
@@ -9,8 +10,8 @@ RowLayout {
         width: 45
         height: 18
         color: "transparent"
-        border.color: BatteryProcess.batteryCapacity <= 20 ? "#f38ba8" : "#8b9198" // outline
-        border.width: 2
+        border.color: Color.Matugen.colors.on_background // outline
+        border.width: 1.3
         radius: 3
 
         // Battery fill
@@ -22,7 +23,7 @@ RowLayout {
             width: Math.max(0, (parent.width - 4) * (BatteryProcess.batteryCapacity / 100))
             color: {
                 if (BatteryProcess.batteryStatus === "Charging")
-                    return '#15be17';
+                    return "#15be17";
 
                 if (BatteryProcess.batteryCapacity <= 20)
                     return "#d00000";
@@ -30,7 +31,7 @@ RowLayout {
                 if (BatteryProcess.batteryCapacity <= 30)
                     return "#ffb000";
 
-                return "#353a3d"; //surface bright
+                return "#15be17"; //surface bright
             }
             radius: 2
         }
@@ -39,7 +40,7 @@ RowLayout {
         Rectangle {
             anchors.left: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            width: 3
+            width: 2.3
             height: 10
             color: batOutline.border.color
             radius: 1
@@ -59,7 +60,7 @@ RowLayout {
 
                 return "N/A";
             }
-            color: "#dfe3e7" // On Background
+            color: Color.Matugen.colors.on_background
             font.pixelSize: 10
             font.bold: true
             anchors.centerIn: parent
