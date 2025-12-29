@@ -40,7 +40,7 @@ PanelWindow {
             BatteryWidget {
             }
 
-            NotificationWidget {
+            SettingsWidget {
             }
 
         }
