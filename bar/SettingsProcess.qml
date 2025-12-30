@@ -11,7 +11,7 @@ Singleton {
     Process {
         id: toggleSwaync
 
-        command: ["sh", "-c", "swaync-client -t -sw"]
+        command: ["sh", "-c", "pkill -x rofi 2>/dev/null; swaync-client -t -sw"]
     }
 
 }
