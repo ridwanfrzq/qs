@@ -1,8 +1,13 @@
 import Quickshell
 import qs.bar
 
-Scope {
-    Bar {
+ShellRoot {
+    LazyLoader {
+        active: true
+
+        component: Bar {
+        }
+
     }
 
 }
