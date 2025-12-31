@@ -22,7 +22,7 @@ RowLayout {
 
     Text {
         text: WorkspaceProcess.overview === "Overview is open." ? "[Overview]" : WorkspaceProcess.window
-        color: Color.Matugen.colors.on_background
+        color: Color.Matugen.colors.outline
         font.pixelSize: 14
         font.family: "Iosevka NF"
         Layout.leftMargin: 3
