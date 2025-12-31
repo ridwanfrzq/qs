@@ -4,6 +4,8 @@ import Quickshell
 import qs.color as Color
 
 RowLayout {
+    property string percentage: Math.round(BatteryProcess.percentage * 100)
+
     Rectangle {
         id: batOutline
 
@@ -20,15 +22,15 @@ RowLayout {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.margins: 2
-            width: Math.max(0, (parent.width - 4) * (BatteryProcess.batteryCapacity / 100))
+            width: Math.max(0, (parent.width - 4) * (percentage / 100))
             color: {
-                if (BatteryProcess.batteryStatus === "Charging")
+                if (BatteryProcess.isCharging)
                     return "#15be17";
 
-                if (BatteryProcess.batteryCapacity <= 20)
+                if (percentage <= 20)
                     return "#d00000";
 
-                if (BatteryProcess.batteryCapacity <= 30)
+                if (percentage <= 30)
                     return "#ffb000";
 
                 return "#15be17"; //surface bright
@@ -48,18 +50,7 @@ RowLayout {
 
         // Percentage text
         Text {
-            text: {
-                if (BatteryProcess.batteryStatus === "Charging")
-                    return "󱐋 " + BatteryProcess.batteryCapacity + "%";
-
-                if (BatteryProcess.batteryStatus === "Discharging")
-                    return BatteryProcess.batteryCapacity + "%";
-
-                if (BatteryProcess.batteryStatus === "Not charging")
-                    return BatteryProcess.batteryCapacity + "%";
-
-                return "N/A";
-            }
+            text: BatteryProcess.isCharging ? "󱐋 " + percentage + "%" : percentage + "%"
             color: Color.Matugen.colors.on_background
             font.pixelSize: 10
             font.bold: true
