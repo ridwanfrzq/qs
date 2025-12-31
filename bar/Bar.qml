@@ -26,7 +26,12 @@ PanelWindow {
             anchors.verticalCenter: parent.verticalCenter
             anchors.leftMargin: 10
 
-            WorkspaceWidget {
+            Loader {
+                active: true
+
+                sourceComponent: WorkspaceWidget {
+                }
+
             }
 
         }
@@ -37,16 +42,36 @@ PanelWindow {
             anchors.rightMargin: 10
             spacing: 10
 
-            BatteryWidget {
+            Loader {
+                active: true
+
+                sourceComponent: BatteryWidget {
+                }
+
             }
 
-            SettingsWidget {
+            Loader {
+                active: true
+
+                sourceComponent: SettingsWidget {
+                }
+
             }
 
         }
 
-        ClockWidget {
-            anchors.centerIn: parent
+        Item {
+            anchors.fill: parent
+
+            Loader {
+                anchors.centerIn: parent
+                active: true
+
+                sourceComponent: ClockWidget {
+                }
+
+            }
+
         }
 
     }
