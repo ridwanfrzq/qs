@@ -18,6 +18,14 @@ PanelWindow {
         right: true
     }
 
+    Rectangle {
+        anchors.bottom: parent.bottom
+        width: parent.width
+        height: 1
+        color: Color.Matugen.colors.outline
+        opacity: 0.8
+    }
+
     Item {
         anchors.fill: parent
 
