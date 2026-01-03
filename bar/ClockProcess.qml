@@ -5,7 +5,7 @@ pragma Singleton
 Singleton {
     // format bebas
     readonly property string time: {
-        Qt.formatDateTime(clock.date, "HH:mm AP");
+        Qt.formatDateTime(clock.date, "hh:mm AP");
     }
     readonly property string date: {
         Qt.formatDateTime(clock.date, "ddd dd MMMM");
