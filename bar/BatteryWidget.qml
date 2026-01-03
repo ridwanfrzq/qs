@@ -3,58 +3,110 @@ import QtQuick.Layouts
 import Quickshell
 import qs.color as Color
 
-RowLayout {
+Item {
+    id: battery
+
     property string percentage: Math.round(BatteryProcess.percentage * 100)
+    property bool showPopup: false
 
-    Rectangle {
-        id: batOutline
+    implicitHeight: batOutline.height
+    implicitWidth: batOutline.width
 
-        width: 45
-        height: 18
-        color: "transparent"
-        border.color: Color.Matugen.colors.on_background // outline
-        border.width: 1.3
-        radius: 3
-
-        // Battery fill
+    RowLayout {
         Rectangle {
-            anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            anchors.margins: 2
-            width: Math.max(0, (parent.width - 4) * (percentage / 100))
-            color: {
-                if (BatteryProcess.isCharging)
-                    return "#15be17";
+            id: batOutline
 
-                if (percentage <= 20)
-                    return "#d00000";
+            width: 45
+            height: 18
+            color: "transparent"
+            border.color: Color.Matugen.colors.on_background // outline
+            border.width: 1.3
+            radius: 3
 
-                if (percentage <= 30)
-                    return "#ffb000";
+            // Battery fill
+            Rectangle {
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.margins: 2
+                width: Math.max(0, (parent.width - 4) * (percentage / 100))
+                color: {
+                    if (BatteryProcess.isCharging)
+                        return "#15be17";
 
-                return "#15be17"; //surface bright
+                    if (percentage <= 20)
+                        return "#d00000";
+
+                    if (percentage <= 30)
+                        return "#ffb000";
+
+                    return "#15be17"; //surface bright
+                }
+                radius: 2
             }
-            radius: 2
+
+            // Battery tip (the little nub on the right)
+            Rectangle {
+                anchors.left: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                width: 2.3
+                height: 10
+                color: batOutline.border.color
+                radius: 1
+            }
+
+            // Percentage text
+            Text {
+                text: BatteryProcess.isCharging ? "󱐋 " + percentage + "%" : percentage + "%"
+                color: Color.Matugen.colors.on_background
+                font.pixelSize: 10
+                font.bold: true
+                anchors.centerIn: parent
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    battery.showPopup = !battery.showPopup;
+                }
+            }
+
         }
 
-        // Battery tip (the little nub on the right)
-        Rectangle {
-            anchors.left: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            width: 2.3
-            height: 10
-            color: batOutline.border.color
-            radius: 1
-        }
+    }
 
-        // Percentage text
-        Text {
-            text: BatteryProcess.isCharging ? "󱐋 " + percentage + "%" : percentage + "%"
-            color: Color.Matugen.colors.on_background
-            font.pixelSize: 10
-            font.bold: true
-            anchors.centerIn: parent
+    LazyLoader {
+        active: battery.showPopup
+
+        PanelWindow {
+            anchors.top: true
+            anchors.right: true
+            margins.top: screen.height / 150
+            margins.right: screen.width / 150
+            exclusiveZone: 0
+            implicitWidth: 250
+            implicitHeight: 100
+            color: "transparent"
+
+            Rectangle {
+                anchors.fill: parent
+                radius: height / 7
+                color: Color.Matugen.colors.background
+
+                Text {
+                    text: "Battery is at " + percentage
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    anchors.leftMargin: 10
+                    anchors.topMargin: 10
+                    color: Color.Matugen.colors.on_background
+                }
+
+            }
+
+            mask: Region {
+            }
+
         }
 
     }

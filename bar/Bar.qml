@@ -53,6 +53,14 @@ PanelWindow {
             Loader {
                 active: true
 
+                sourceComponent: TrayWidget {
+                }
+
+            }
+
+            Loader {
+                active: true
+
                 sourceComponent: BatteryWidget {
                 }
 
